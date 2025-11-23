@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody Jaymee Jersey - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen bg-[#0a0a0a] overflow-x-hidden flex flex-col justify-between">
+
+    <!-- CERTIFICATE MODAL (Pop-up) -->
+    <div id="cert-modal" class="modal hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+        <div class="relative max-w-4xl w-full bg-[#111] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl transform transition-all scale-95 opacity-0" id="cert-modal-content">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-800">
+                <h3 id="modal-title" class="text-white font-bold text-lg">Certificate Title</h3>
+                <button id="close-cert-modal" class="text-gray-400 hover:text-white transition-colors p-1">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <!-- Image Container -->
+            <div class="p-2 bg-[#050505] flex justify-center items-center min-h-[300px]">
+                <img id="modal-img" src="" alt="Certificate" class="max-h-[70vh] w-auto object-contain rounded-md shadow-lg" />
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    <div id="contact-modal" class="modal hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+        <div class="relative max-w-2xl w-full bg-[#0a0a0a] border border-gray-800 rounded-2xl p-8 shadow-2xl transform transition-all scale-95 opacity-0" id="contact-modal-content">
+            
+            <!-- Close Button -->
+            <button id="close-contact-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <h2 class="text-2xl font-bold text-white mb-6">say hello!</h2>
+
+            <!-- FORM -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4" id="contact-form">
+                
+                <input type="hidden" name="access_key" id="access-key-input">
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1">
+                        <input type="text" name="first_name" placeholder="First Name" class="form-input" required />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <input type="text" name="last_name" placeholder="Last Name" class="form-input" required />
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <input type="email" name="email" placeholder="Email Address" class="form-input" required />
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <input type="text" name="subject" placeholder="Subject" class="form-input" required />
+                </div>
+
+                <div class="flex flex-col gap-1 relative">
+                    <textarea name="message" rows="5" placeholder="Message (Required)" class="form-input resize-none" required></textarea>
+                </div>
+
+                <!-- HoneyPot Anti-Spam -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <div class="flex justify-end pt-2">
+                    <button type="submit" class="submit-btn">
+                        Submit
+                    </button>
+                </div>
+                
+                <p class="text-xs text-gray-600 mt-2 text-center" id="form-result"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-16 pt-12 lg:pt-20 pb-6 w-full">
+        
+        <!-- GRID LAYOUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-24">
+          
+            <!-- --- LEFT COLUMN (Profile, Edu, Skills) --- -->
+            <div class="lg:col-span-5 space-y-16">
+            
+                <!-- Profile Header -->
+                <section class="reveal">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-4">
+                            <!-- PROFILE ICON SECTION -->
+                            <!-- Hover to change view -->
+                            <div class="w-20 h-20 rounded-full ring-2 ring-purple-500/20 bg-gray-800 shadow-lg shrink-0 overflow-hidden group relative" id="profile-container">
+                                <!-- Profile Image -->
+                                <img id="profile-avatar" src="front.png" alt="Profile" class="w-full h-full object-cover transition-opacity duration-300" />
+                            </div>
+                            
+                            <div>
+                                <h1 class="text-2xl font-bold text-white tracking-tight whitespace-nowrap">Melody Jaymee Jersey</h1>
+                                <p class="text-gray-400 text-sm">Information Technology Student</p>
+                            </div>
+                        </div>
+                        <a href="assets/CV_Jersey (1).pdf" download="Melody_Jersey_CV.pdf" class="text-gray-400 hover:text-white transition-colors hover:scale-110 transform duration-200" aria-label="Download Resume" title="Download CV">
+                            <i data-lucide="download" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+
+                    <p class="text-gray-400 leading-relaxed mb-8 text-sm text-justify">
+                        I'm an IT student currently building my foundation in web development and UI/UX design — learning how to create clean, simple, and user-focused digital experiences. I spend my free time working on small projects that help me practice coding, improve my design workflow, and explore new tools and technologies.
+                    </p>
+
+                    <!-- Social Links -->
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <a href="https://github.com/mjersey" target="_blank" class="flex items-center gap-2 bg-[#7e22ce] hover:bg-[#6b21a8] text-white px-4 py-2 rounded-full text-sm font-medium transition-all hover:translate-y-[-2px]">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                            GitHub
+                        </a>
+                        
+                        <!-- Email Button Modal -->
+                        <button id="open-contact-btn" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all hover:translate-y-[-2px]">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            Email Me
+                        </button>
+
+                        <a href="https://www.linkedin.com/in/mjjersey06" target="_blank" class="flex items-center gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white px-4 py-2 rounded-full text-sm font-medium transition-all hover:translate-y-[-2px]">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section class="reveal delay-100">
+                    <h3 class="text-xl font-bold text-gray-100 mb-6 flex items-center gap-2">
+                        education
+                        <div class="h-px bg-gray-800 flex-grow ml-4"></div>
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- School 1 -->
+                        <div class="flex gap-4 group">
+                            <div class="w-12 h-12 rounded-lg bg-white p-1 flex-shrink-0 overflow-hidden shadow-sm">
+                                <img src="images/olfu.png" onerror="this.src='https://placehold.co/48x48?text=OLFU'" alt="OLFU" class="w-full h-full object-contain" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="text-white font-medium text-sm group-hover:text-purple-400 transition-colors">Our Lady of Fatima University - QC</h4>
+                                    <span class="text-xs text-gray-500 flex-shrink-0 ml-2">2022 - 2026</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">BS Information Technology</p>
+                            </div>
+                        </div>
+                        <!-- School 2 -->
+                        <div class="flex gap-4 group">
+                            <div class="w-12 h-12 rounded-lg bg-white p-1 flex-shrink-0 overflow-hidden shadow-sm">
+                                <img src="images/datamex.png" onerror="this.src='https://placehold.co/48x48?text=D'" alt="Datamex" class="w-full h-full object-contain" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="text-white font-medium text-sm group-hover:text-purple-400 transition-colors">Datamex College of Saint Adeline</h4>
+                                    <span class="text-xs text-gray-500 flex-shrink-0 ml-2">2020 - 2022</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Information Communications Technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section class="reveal delay-200">
+                    <h3 class="text-xl font-bold text-gray-100 mb-6 flex items-center gap-2">
+                        skills
+                        <div class="h-px bg-gray-800 flex-grow ml-4"></div>
+                    </h3>
+                    <div class="grid gap-4">
+                        <div class="bg-[#111] border border-gray-800/50 rounded-lg p-4 hover:border-blue-500/30 hover:bg-gray-900 transition-all duration-300 group cursor-default">
+                            <h4 class="text-white font-medium mb-2 text-sm flex items-center gap-2 group-hover:text-blue-400 transition-colors">
+                                <i data-lucide="layout" class="w-5 h-5 text-blue-500"></i> Web Development
+                            </h4>
+                            <p class="text-xs text-gray-400 mb-3 leading-relaxed">Creating responsive and interactive websites with a focus on usability and dynamic content.</p>
+                            <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wide">HTML, CSS, JavaScript, API</p>
+                        </div>
+                        <div class="bg-[#111] border border-gray-800/50 rounded-lg p-4 hover:border-purple-500/30 hover:bg-gray-900 transition-all duration-300 group cursor-default">
+                            <h4 class="text-white font-medium mb-2 text-sm flex items-center gap-2 group-hover:text-purple-400 transition-colors">
+                                <i data-lucide="palette" class="w-5 h-5 text-purple-500"></i> UI/UX Design
+                            </h4>
+                            <p class="text-xs text-gray-400 mb-3 leading-relaxed">Designing clean, intuitive, and user-friendly interfaces, from wireframing to prototyping.</p>
+                            <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wide">Figma, Adobe XD, Canva</p>
+                        </div>
+                        <div class="bg-[#111] border border-gray-800/50 rounded-lg p-4 hover:border-green-500/30 hover:bg-gray-900 transition-all duration-300 group cursor-default">
+                            <h4 class="text-white font-medium mb-2 text-sm flex items-center gap-2 group-hover:text-green-400 transition-colors">
+                                <i data-lucide="terminal" class="w-5 h-5 text-green-500"></i> Programming & Automation
+                            </h4>
+                            <p class="text-xs text-gray-400 mb-3 leading-relaxed">Developing automation tools, desktop applications, and managing data efficiently.</p>
+                            <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wide">Python (Tkinter, Pandas, NumPy), MySQL, JavaScript</p>
+                        </div>
+                        <div class="bg-[#111] border border-gray-800/50 rounded-lg p-4 hover:border-red-500/30 hover:bg-gray-900 transition-all duration-300 group cursor-default">
+                            <h4 class="text-white font-medium mb-2 text-sm flex items-center gap-2 group-hover:text-red-400 transition-colors">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5 text-red-500"></i> Data Analytics & AI
+                            </h4>
+                            <p class="text-xs text-gray-400 mb-3 leading-relaxed">Analyzing and visualizing data to provide actionable insights and predictive modeling.</p>
+                            <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wide">Matplotlib, Seaborn, AI</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- --- RIGHT COLUMN --- -->
+            <div class="lg:col-span-7 space-y-20 lg:pl-8">
+            
+                <!-- Selected Projects -->
+                <section class="reveal">
+                    <h3 class="text-xl font-bold text-gray-100 mb-8 flex items-center gap-2">
+                        selected projects
+                        <div class="h-px bg-gray-800 flex-grow ml-4"></div>
+                    </h3>
+                    
+                    <div class="relative pl-4 border-l-2 border-blue-900/40 space-y-16">
+                        <!-- Project 1 -->
+                        <div class="relative pl-8 group reveal delay-100">
+                            <div class="absolute -left-[27px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-[#0a0a0a] group-hover:scale-125 group-hover:bg-purple-500 transition-all duration-300 shadow-[0_0_12px_rgba(37,99,235,0.8)]"></div>
+                            <div class="flex gap-4 items-center mb-3">
+                                <div class="w-12 h-12 rounded-lg bg-red-700 flex-shrink-0 shadow-lg flex items-center justify-center text-white/20">
+                                   <i data-lucide="activity" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <!-- ADDED LINK HERE -->
+                                    <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        <a href="#" target="_blank" class="hover:underline decoration-blue-400 underline-offset-4">DiabeTech</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-4 leading-relaxed">AI-powered diabetes risk predictor and analytics dashboard. Intuitive interface with real-time insights for doctors.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs border border-gray-600 text-gray-400 rounded-full">Python</span>
+                                <span class="px-3 py-1 text-xs border border-gray-600 text-gray-400 rounded-full">Scikit-learn</span>
+                                <span class="px-3 py-1 text-xs border border-gray-600 text-gray-400 rounded-full">Pandas</span>
+                                <span class="px-3 py-1 text-xs border border-gray-600 text-gray-400 rounded-full">Flask</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="relative pl-8 group reveal delay-100">
+                            <div class="absolute -left-[27px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-[#0a0a0a] group-hover:scale-125 group-hover:bg-purple-500 transition-all duration-300 shadow-[0_0_12px_rgba(37,99,235,0.8)]"></div>
+                            <div class="flex gap-4 items-center mb-3">
+                                <div class="w-12 h-12 rounded-lg bg-purple-600 flex-shrink-0 shadow-lg flex items-center justify-center text-white/20">
+                                    <i data-lucide="banknote" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <!-- ADDED LINK HERE -->
+                                    <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        <a href="#" target="_blank" class="hover:underline decoration-blue-400 underline-offset-4">Payroll Automation System</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-4 leading-relaxed">Automated payroll solution with tax and deduction calculations. Streamlines salary processing and generates payslips efficiently.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs border border-orange-600 text-orange-500 rounded-full">HTML</span>
+                                <span class="px-3 py-1 text-xs border border-yellow-600 text-yellow-500 rounded-full">JS</span>
+                                <span class="px-3 py-1 text-xs border border-cyan-600 text-cyan-500 rounded-full">CSS</span>
+                                <span class="px-3 py-1 text-xs border border-purple-600 text-purple-500 rounded-full">PHP</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="relative pl-8 group reveal delay-100">
+                            <div class="absolute -left-[27px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-[#0a0a0a] group-hover:scale-125 group-hover:bg-purple-500 transition-all duration-300 shadow-[0_0_12px_rgba(37,99,235,0.8)]"></div>
+                            <div class="flex gap-4 items-center mb-3">
+                                <div class="w-12 h-12 rounded-lg bg-cyan-500 flex-shrink-0 shadow-lg flex items-center justify-center text-white/20">
+                                    <i data-lucide="bed-double" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <!-- ADDED LINK HERE -->
+                                    <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        <a href="#" target="_blank" class="hover:underline decoration-blue-400 underline-offset-4">Hotel Website (Demo)</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-4 leading-relaxed">Responsive hotel booking website with room showcase, reservation system, and interactive UI. Demo-ready for web presentation.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs border border-orange-600 text-orange-500 rounded-full">HTML</span>
+                                <span class="px-3 py-1 text-xs border border-yellow-600 text-yellow-500 rounded-full">JS</span>
+                                <span class="px-3 py-1 text-xs border border-cyan-600 text-cyan-500 rounded-full">CSS</span>
+                                <span class="px-3 py-1 text-xs border border-blue-600 text-blue-500 rounded-full">MySQL</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="relative pl-8 group reveal delay-100">
+                            <div class="absolute -left-[27px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-[#0a0a0a] group-hover:scale-125 group-hover:bg-purple-500 transition-all duration-300 shadow-[0_0_12px_rgba(37,99,235,0.8)]"></div>
+                            <div class="flex gap-4 items-center mb-3">
+                                <div class="w-12 h-12 rounded-lg bg-green-600 flex-shrink-0 shadow-lg flex items-center justify-center text-white/20">
+                                    <i data-lucide="calculator" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <!-- ADDED LINK HERE -->
+                                    <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        <a href="#" target="_blank" class="hover:underline decoration-blue-400 underline-offset-4">GWA Calculator</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-4 leading-relaxed">A handy tool for students to calculate their General Weighted Average easily. Features a simple UI and instant calculation.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs border border-orange-600 text-orange-500 rounded-full">HTML</span>
+                                <span class="px-3 py-1 text-xs border border-yellow-600 text-yellow-500 rounded-full">JS</span>
+                                <span class="px-3 py-1 text-xs border border-cyan-600 text-cyan-500 rounded-full">CSS</span>
+                                <span class="px-3 py-1 text-xs border border-gray-600 text-gray-400 rounded-full">Bootstrap</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 5 -->
+                        <div class="relative pl-8 group reveal delay-100">
+                            <div class="absolute -left-[27px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-[#0a0a0a] group-hover:scale-125 group-hover:bg-purple-500 transition-all duration-300 shadow-[0_0_12px_rgba(37,99,235,0.8)]"></div>
+                            <div class="flex gap-4 items-center mb-3">
+                                <div class="w-12 h-12 rounded-lg bg-indigo-600 flex-shrink-0 shadow-lg flex items-center justify-center text-white/20">
+                                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <!-- ADDED LINK HERE -->
+                                    <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        <a href="#" target="_blank" class="hover:underline decoration-blue-400 underline-offset-4">E-Commerce Dashboard</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-4 leading-relaxed">Admin dashboard for managing products, orders, and customers. Features real-time sales analytics and inventory tracking.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs border border-blue-500 text-blue-400 rounded-full">React</span>
+                                <span class="px-3 py-1 text-xs border border-green-500 text-green-400 rounded-full">Node.js</span>
+                                <span class="px-3 py-1 text-xs border border-green-600 text-green-500 rounded-full">MongoDB</span>
+                                <span class="px-3 py-1 text-xs border border-cyan-600 text-cyan-500 rounded-full">Tailwind</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- END OF GRID -->
+
+        <!-- CERTIFICATIONS -->
+        <section class="reveal relative mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <h3 class="text-xl font-bold text-gray-100 flex items-center gap-2">
+                    certifications
+                    <div class="h-px bg-gray-800 w-12 md:w-24 ml-4"></div>
+                </h3>
+                
+                <!-- Filter Buttons -->
+                <div class="flex gap-2 bg-[#111] p-1 rounded-lg border border-gray-800/50">
+                    <button class="filter-btn active px-4 py-1.5 text-xs font-medium rounded-md text-white bg-[#222] hover:bg-[#333] transition-all" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md text-gray-400 hover:text-white hover:bg-[#222] transition-all" data-filter="2025">2025</button>
+                    <button class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md text-gray-400 hover:text-white hover:bg-[#222] transition-all" data-filter="2024">2024</button>
+                </div>
+            </div>
+            
+            <!-- Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="cert-grid">
+                
+                <!-- 1. Data Science -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-purple-400 transition-colors leading-tight">Data Science Essentials with Python</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Network Academy</p>
+                    </div>
+                    <!-- Updated with provided Image -->
+                    <span class="hidden full-img-src">assets/data-science.jpg</span>
+                </div>
+
+                <!-- 2. CCNA Intro -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-blue-400 transition-colors leading-tight">CCNA: Introduction to Networks</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/ccna-intro.jpg</span>
+                </div>
+
+                <!-- 3. CCNA Switching -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-purple-400 transition-colors leading-tight">CCNA: Switching, Routing, and Wireless Essentials</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/cisco.png</span>
+                </div>
+
+                <!-- 4. Hour of Code -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/DICT.png" onerror="this.src='https://placehold.co/48x48?text=DICT'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-yellow-400 transition-colors leading-tight">Hour of Code: Learn AI</h4>
+                        <p class="text-[10px] text-gray-500">DICT - AI ASEAN Programme</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/hourofcode.png</span>
+                </div>
+
+                <!-- 5. Fatima Computing (UPDATED: Year 2024) -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2024" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2024</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/olfu.png" onerror="this.src='https://placehold.co/48x48?text=OLFU'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-green-400 transition-colors leading-tight">Fatima Computing Multimedia Society - QC</h4>
+                        <p class="text-[10px] text-gray-500">Our Lady of Fatima University</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/fcms.jpg</span>
+                </div>
+
+                <!-- 6. Figma 101 -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/figma.png" onerror="this.src='https://placehold.co/48x48?text=Figma'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-purple-400 transition-colors leading-tight">Figma 101: Getting Started with UI/UX Design</h4>
+                        <p class="text-[10px] text-gray-500">EP Computer Programming Services</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/figma.jpg</span>
+                </div>
+
+                <!-- 7. Cybersecurity -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cybersecurity.png" onerror="this.src='https://placehold.co/48x48?text=Cyber'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-blue-400 transition-colors leading-tight">Cybersecurity</h4>
+                        <p class="text-[10px] text-gray-500">Creative Technology Institute</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/cybersecurity.png</span>
+                </div>
+
+                <!-- 8. Basic Troubleshooting -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/troubleshooting.png" onerror="this.src='https://placehold.co/48x48?text=TS'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-orange-400 transition-colors leading-tight">Basic Troubleshooting</h4>
+                        <p class="text-[10px] text-gray-500">Creative Technology Institute</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/troubleshooting.png</span>
+                </div>
+
+                <!-- 9. IT Network -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/network.png" onerror="this.src='https://placehold.co/48x48?text=Net'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-cyan-400 transition-colors leading-tight">IT Network</h4>
+                        <p class="text-[10px] text-gray-500">Creative Technology Institute</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/network.png</span>
+                </div>
+
+                <!-- 10. MS Excel -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/excel.png" onerror="this.src='https://placehold.co/48x48?text=Excel'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-green-500 transition-colors leading-tight">Microsoft Excel Intermediate</h4>
+                        <p class="text-[10px] text-gray-500">GAL220</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/excel.jpg</span>
+                </div>
+
+                <!-- 11. OS Support -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-blue-400 transition-colors leading-tight">Operating System Support</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/os.jpg</span>
+                </div>
+
+                <!-- 12. Cyber Threat Management -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-blue-400 transition-colors leading-tight">Cyber Threat Management</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/cyber-manage.jpg</span>
+                </div>
+
+                <!-- 13. Network Tech Path -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-cyan-400 transition-colors leading-tight">Network Technician Path</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/networkpath.jpg</span>
+                </div>
+
+                <!-- 14. Ethical Hacker -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-red-500 transition-colors leading-tight">Ethical Hacker</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/ethicalhacker.jpg</span>
+                </div>
+
+                <!-- 15. Endpoint Security -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2025" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2025</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-green-400 transition-colors leading-tight">Endpoint Security</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/security.jpg</span>
+                </div>
+
+                <!-- 16. Networking Basics (2024) -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2024" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2024</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-blue-400 transition-colors leading-tight">Networking Basics</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/net-basics.jpg</span>
+                </div>
+
+                <!-- 17. Networking Devices (2024) -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2024" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2024</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-blue-400 transition-colors leading-tight">Networking Devices & Basic Configuration</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/net-devices.jpg</span>
+                </div>
+
+                <!-- 18. Intro to Cybersecurity (2024) -->
+                <div class="cert-item bg-[#111] border border-gray-800 rounded-xl p-6 hover:bg-[#161616] hover:border-gray-700 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex items-center gap-4 fade-in cursor-pointer" data-year="2024" onclick="openModal(this)">
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-[#3b0764] border border-purple-500/20 text-purple-200 text-[10px] font-medium rounded-full">2024</div>
+                    <div class="w-14 h-14 rounded-full bg-white p-2 flex-shrink-0 shadow-md flex items-center justify-center">
+                        <img src="images/cisco.png" onerror="this.src='https://placehold.co/48x48?text=Cisco'" alt="Icon" class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h4 class="text-white font-normal text-[12px] mb-1 group-hover:text-red-400 transition-colors leading-tight">Introduction to Cybersecurity</h4>
+                        <p class="text-[10px] text-gray-500">Cisco Networking Academy</p>
+                    </div>
+                    <span class="hidden full-img-src">assets/intro-cyber.jpg</span>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-end mt-8 gap-4">
+                <button id="prev-certs-btn" class="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-white transition-colors disabled:opacity-30 disabled:hover:text-gray-600" disabled>
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Previous</span>
+                </button>
+                <button id="next-certs-btn" class="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group">
+                    <span>Next</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full py-4 border-t border-gray-800/50 flex justify-center items-center text-xs text-gray-600 mt-auto">
+            <p>© 2025 - Created by MJ Jersey.</p>
+        </footer>
+
+    </div>
+
+    <!-- External JS Scripts -->
+    <script src="script.js"></script>
+    <script src="form-handler.js"></script>
+</body>
+</html>
